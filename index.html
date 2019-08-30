@@ -10,12 +10,12 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
   <title>Card: The Builder!</title>
 </head>
 
-<body>
+<body id="root">
   <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -31,6 +31,8 @@
           <div class="row">
             <div class="col-sm-8">
               <input class="form-control json-entry" id="json-entry" type="text">
+              <small>https://ghibliapi.herokuapp.com/films</small>
+              <small>https://ghibliapi.herokuapp.com/vehicles/</small>
             </div>
             <div class="col-sm-4">
               <button type="button" id="submit-json" class="btn btn-success">Submit JSON</button>
@@ -43,35 +45,49 @@
   </div>
 
   <div class="modal" id="myModalTwo">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-  
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Edit Fields to be displayed</h4>
-          </div>
-  
-          <!-- Modal body -->
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <h4>
-                  Available Fields
-                </h4>
-                <br><br>
-                <div id="field-names">
-                
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <button type="button" id="submit-layout" class="btn btn-success">Submit Layout</button>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Fields to be displayed</h4>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="card col-sm-4">
+              <h4>
+                Available Fields
+              </h4>
+              <br><br>
+              <div id="field-names">
+
               </div>
             </div>
+            <div class="col-sm-8">
+              <div class="card" style="width: 18rem; float: right;">
+                <div class="card-body">
+                  <p class="card-text"><input type="text" name="val1" id="val1" autocomplete="on"></p>
+                  <p class="card-text"><input type="text" name="val2" id="val2" autocomplete="on"></p>
+                  <p class="card-text"><input type="text" name="val3" id="val3" autocomplete="on"></p>
+                  <p class="card-text"><input type="text" name="val4" id="val4" autocomplete="on"></p>
+                  <small>Enter the keys form the list on your left </small>
+                  <br>
+                  <small> Or Just Copy/Paste</small>
+                </div>
+              </div>
+              <br>
+              <br>
+              <button type="button" id="submit-layout" class="btn btn-success" style="float: right;">Submit
+                Layout</button>
+            </div>
           </div>
-  
         </div>
+
       </div>
     </div>
+  </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

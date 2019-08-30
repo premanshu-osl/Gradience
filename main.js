@@ -1,6 +1,10 @@
 //API being used for testing purposes : https://ghibliapi.herokuapp.com/films
+
+// Clears Local Storage On Reload
 localStorage.clear();
+
 if (window.localStorage.length === 0) {
+  $('#myModal').modal({ backdrop: 'static', keyboard: false });
   $('#myModal').modal('show');
 
   document.querySelector('#submit-json').addEventListener('click', function () {
@@ -17,94 +21,77 @@ if (window.localStorage.length === 0) {
       if (request.status >= 200 && request.status < 400 && typeof (Storage) !== undefined) {
         localStorage.setItem("avlData", data);
         $('#myModal').modal('hide');
+        $('#myModalTwo').modal({ backdrop: 'static', keyboard: false });
         $('#myModalTwo').modal('show');
       } else {
       }
       fieldpopulator();
-      // let parsedJSON = JSON.parse(localStorage.getItem('avlData'));
-      // let targetObj = Object.keys(parsedJSON[0]);
-      // let targetObjLength = Object.keys(parsedJSON[0]).length;
-
-      // if(targetObjLength !== null) {
-      //   const fieldNames = document.getElementById('field-names');
-
-        
-
-      //   targetObj.forEach(element => {
-      //     const fields = document.createElement('p');
-      //   fields.setAttribute('class', 'field');
-      //     fields.textContent = element;
-      //     fieldNames.appendChild(fields);
-      //   });
-      // }
     }
 
     request.send();
 
   });
+
 } else {
+
   alert("Local Storage not empty. May contain relevant JSON format files.");
 
   $('#myModalTwo').modal('show');
   fieldpopulator();
-      // let parsedJSON = JSON.parse(localStorage.getItem('avlData'));
-      // let targetObj = Object.keys(parsedJSON[0]);
-      // let targetObjLength = Object.keys(parsedJSON[0]).length;
-
-      // if(targetObjLength !== null) {
-      //   const fieldNames = document.getElementById('field-names');
-
-        
-
-      //   targetObj.forEach(element => {
-      //     const fields = document.createElement('p');
-      //   fields.setAttribute('class', 'field');
-      //     fields.textContent = element;
-      //     fieldNames.appendChild(fields);
-      //   });
-      // }
 }
+
+// Populates the field on 2nd Screen
 
 function fieldpopulator() {
   let parsedJSON = JSON.parse(localStorage.getItem('avlData'));
-      let targetObj = Object.keys(parsedJSON[0]);
-      let targetObjLength = Object.keys(parsedJSON[0]).length;
+  let targetObj = Object.keys(parsedJSON[0]);
+  let targetObjLength = Object.keys(parsedJSON[0]).length;
 
-      if(targetObjLength !== null) {
-        const fieldNames = document.getElementById('field-names');
+  if (targetObjLength !== null) {
+    const fieldNames = document.getElementById('field-names');
 
-        
-
-        targetObj.forEach(element => {
-          const fields = document.createElement('p');
-        fields.setAttribute('class', 'field');
-          fields.textContent = element;
-          fieldNames.appendChild(fields);
-        });
-      }
+    targetObj.forEach(element => {
+      const fields = document.createElement('p');
+      fields.setAttribute('class', 'field');
+      fields.textContent = element;
+      fieldNames.appendChild(fields);
+    });
+  }
 }
 
+document.querySelector('#submit-layout').addEventListener('click', function () {
 
+  $('#myModalTwo').modal('hide');
 
-// let jsonFile = document.querySelector('#json-entry');
+  let parsedJSON = JSON.parse(localStorage.getItem('avlData'));
 
-// document.querySelector('#submit-json').addEventListener('click', function () {
+  let values = [];
 
-//   var jsonFile = document.querySelector('#json-entry').value;
-//   alert(jsonFile);
-//   var request = new XMLHttpRequest();
+  values.push(document.getElementById('val1').value);
+  values.push(document.getElementById('val2').value);
+  values.push(document.getElementById('val3').value);
+  values.push(document.getElementById('val4').value);
+  const app = document.getElementById('root');
+  for (j = 0; j <= parsedJSON.length - 1; j++) {
+    const card = document.createElement('div');
+    card.setAttribute('class', 'card');
+    app.appendChild(card);
+    for (i = 0; i <= values.length - 1; i++) {
+      let targetObj = Object.keys(parsedJSON[j]);
 
-//   request.open('GET', jsonFile, true);
+      targetObj.forEach(element => {
+        if (values[i] === element) {
+          console.log(element);
 
-//   request.onload = function () {
-//     var data = this.response;
+          let fapp = document.createElement('p')
+          fapp.textContent = parsedJSON[j][element];
 
-//     if (request.status >= 200 && request.status < 400 && typeof (Storage) !== undefined) {
-//       localStorage.setItem("avlData", data);
-//     } else {
-//     }
-//   }
+          card.appendChild(fapp);
 
-//   request.send();
+        }
+      });
+    }
+  }
 
-// });
+  console.log(values);
+});
